@@ -1,0 +1,14 @@
+<div class="banner container" *ngIf="shows">
+  <h1>{{ title }}</h1>
+  <div class="grid">
+    <div class="col-2" *ngFor="let show of shows">
+      <app-show-item [showItem]="show" [showType]="showsType"></app-show-item>  <!-- ? 3 (top rated, popular, upcoming)type er show er modhe theke 1 type ekhnane ashtese then oi type er 12 ta movie show kortese -->
+    </div> <!-- !show-item.component.ts e input hishe dhuktese each show-->
+  </div>
+</div>
+
+
+<!-- ! shows$ | async as showgula   (server er data dite delay hole asyn pore oi data ta hold kore and )-->
+<!-- ! pore jokhn server er kaas theke data pay tokhn oita showgula te store how and website e show kore-->
+<!--? normally server er kaas theke data ashte deri hole website e kisui show kore na but ekhn async er karone -->
+<!--? ei problem ta hoy na karon server er deri holeo async pipe e data eshe store hoye thake then oita website e show kore -->

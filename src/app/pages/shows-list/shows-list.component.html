@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="grid">
+    <div class="col-12">
+      <span class="p-input-icon-left">
+        <!--! primeng theke template neya-->
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="searchValue"
+          (change)="searchChanged()"
+        /> <!--! Je movie name ami type kore input dibo oita "searcValue" te store hobe-->
+        <!--*searchValue change hole searchChanged() function e dhukbe-->
+      </span>
+    </div>
+  </div>
+
+  <ng-container *ngIf="showsList$ | async as listde">
+    <!--! showsList theke movie/show gula interative way te show-item component e pass hobe-->
+    <div class="grid">
+      <div class="col-2" *ngFor="let shows of listde.results">
+        <app-show-item [showItem]="shows" [showType]="showsType"/>
+      </div>
+    </div>
+
+  <div class="grid">
+    <div class="col-12">
+      <p-paginator
+        (onPageChange)="pageBodlao($event)"
+        [rows]="20"
+        [totalRecords]="listde.total_results"
+      /><!--! Total Records mane koto gula show/ movie fetch korbe-->
+    </div>
+    <!--* [row]= jei value dibo toto gula show/movie show korbe per page e-->
+  </div>
+</ng-container>
+</div>
+
+<!--? [(ngModel)]="value" is used to read the value from the input and use in code. Etai data binding-->
+<!--? website e inspect kore console values check kore buste hobe page number koto theke start hoise-->

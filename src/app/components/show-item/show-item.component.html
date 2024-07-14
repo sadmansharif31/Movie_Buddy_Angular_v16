@@ -1,0 +1,21 @@
+<a
+  class="show-item"
+  *ngIf="showItem"
+  [routerLink]="'/detail/' + showItem.id + '/' + showType"
+  ><!--! id and type ta showDetailComponent e pass hobe. showDetailComponent ei value gula ke catch korbe. See app-routing-module-->
+  <div class="show-item-rating">
+    <i class="pi pi-star"></i>
+    <span>{{ showItem.vote_average }} / 10</span>
+  </div>
+  <div class="show-item-image">
+    <img
+      [src]="imageBaseUrl + '/w500/' + showItem.poster_path"
+      [alt]="showItem.title"
+    />
+  </div>
+  <div class="show-item-title">
+    {{ showItem.original_title }}
+  </div>
+</a>
+
+<!--? detail path e niye jabe. See app-router-module... showItem.id amake id dibe while clicking and ---showType amake type dibe-->

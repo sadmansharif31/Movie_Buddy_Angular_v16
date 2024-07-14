@@ -1,0 +1,79 @@
+<!--?===================================== Routing Use Kore ========================================-->
+
+<div class="container">
+  <div class="grid">
+    <div class="col-12 genres-links">
+      <ng-container *ngIf="genres$ | async as genrede">
+        <a
+          *ngFor="let gen of genrede"
+          [routerLink]="'/genres/'+ gen.id"
+          role="button"
+          aria-hidden="true"
+          >{{ gen.name }}</a
+        >
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-container *ngIf="shows$ | async as genrelistde">
+    <div class="grid">
+      <div class="col-2" *ngFor="let shows of genrelistde.results">
+        <app-show-item [showItem]="shows"></app-show-item>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12">
+        <p-paginator
+          (onPageChange)="pageBodlao($event)"
+          [rows]="20"
+          [totalRecords]="genrelistde.total_results"
+        ></p-paginator>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+
+<!--?===================================== Click Use Kore ========================================-->
+
+<!-- <div class="container">
+  <div class="grid">
+    <div class="col-12 genres-links">
+      <ng-container *ngIf="genres$ | async as genrede">
+        <a
+          *ngFor="let gen of genrede"
+          (keydown)="findByGenre(gen.id)"
+          (click)="findByGenre(gen.id)"
+          role="button"
+          aria-hidden="true"
+          >{{ gen.name }}</a
+        >
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-container *ngIf="shows$ | async as genrelistde">
+    <div class="grid">
+      <div class="col-2" *ngFor="let shows of genrelistde.results">
+        <app-show-item [showItem]="shows"></app-show-item>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12">
+        <p-paginator
+          (onPageChange)="pageBodlao($event)"
+          [rows]="20"
+          [totalRecords]="genrelistde.total_results"
+        ></p-paginator>
+      </div>
+    </div>
+  </ng-container>
+</div> -->
+
+<!--? Role="button" mane ei link ta ekta button er moto kaaj korbe-->
+<!--! Binds the click event of the <a> element to the findByGenre method, passing the id of the current genre (gen.id).-->
+<!--* Click mouse use kore select korar jonno use hoy and keydown keyboard use select korar jonno use hoy-->
+
+<!--! Ei container is same as the show-list-component-->

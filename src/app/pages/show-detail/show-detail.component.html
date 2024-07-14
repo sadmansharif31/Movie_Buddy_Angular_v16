@@ -1,0 +1,126 @@
+<ng-container *ngIf="show$ | async as showdeo">
+  <app-slider [slides]="[showdeo]" [isHeader]="true"> </app-slider>
+
+  <p-tabView>
+    <!--? This templates are from primeng-->
+    <p-tabPanel header="Overview">
+      <div class="grid">
+        <!--? grid er modehe column describe korle oi column shomoporiman jayga nibe-->
+        <div class="col-3">
+          <img
+            class="poster"
+            [src]="imagesSizes.medium + showdeo.poster_path"
+            alt=""
+          />
+        </div>
+
+        <div class="col-9">
+          <h2>Overview</h2>
+
+          <p class="overview">{{ showdeo.overview }}</p>
+          <div class="stat">
+            <div class="label">Release Date:</div>
+            <div class="value">
+              {{ showdeo.release_date | date : "dd.MM.yyyy" }}
+            </div>
+          </div>
+          <div class="stat">
+            <div class="label">Language:</div>
+            <div class="value">
+              {{ showdeo.original_language }}
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Revenue:</div>
+            <div class="value">
+              {{ showdeo.revenue | currency }}
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Duration:</div>
+            <div class="value">{{ showdeo.runtime }} min</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Status:</div>
+            <div class="value">
+              {{ showdeo.status }}
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Genres:</div>
+            <div class="value">
+              <span *ngFor="let genre of showdeo.genres"
+                >{{ genre.name }}
+              </span>
+              <!--*list akare thakle always use ngFor-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Videos">
+      <ng-container *ngIf="showVideos$ | async as videodeo">
+        <div class="grid">
+          <div class="col-4" *ngFor="let video of videodeo">
+            <app-video-embed [key]="video.key"> </app-video-embed>
+          </div>
+        </div>
+      </ng-container>
+    </p-tabPanel>
+    <p-tabPanel header="Photos">
+      <ng-container *ngIf="showImages$ | async as imagedeo">
+        <div class="grid">
+          <div class="col-2" *ngFor="let image of imagedeo">
+            <p-image
+              [src]="imagesSizes.large + image.file_path"
+              [alt]="showdeo.title"
+              width="100%"
+              [preview]="true"
+            />
+            <!--! prime ng theke ei documentation ta niyechi. Just copy paste korechi and image link ta diyechi-->
+          </div>
+          <!--! jodi image kono karone load na hoy tokhn alternate hishebe showdeo.title use hobe-->
+        </div>
+      </ng-container>
+    </p-tabPanel>
+  </p-tabView>
+
+  <ng-container *ngIf="showCast$ | async as castdeo">
+    <p-carousel
+      [value]="castdeo"
+      [numVisible]="6"
+      [numScroll]="3"
+      [circular]="false"
+    >
+      <ng-template let-actorsss pTemplate="item">
+        <!--?castdeo tai let-actorsss(actorsss) er modhe dhuktese-->
+        <div class="actor">
+          <img
+            *ngIf="actorsss.profile_path; else defaultActorPhoto"
+            [src]="imagesSizes.medium + actorsss.profile_path"
+            alt=""
+          />
+          <!--? eijonno ekhane actorsss use hoyeche-->
+          <!--! ekhane else condition diye ekta alada template deya hoyeche. Like jodi api theke actor er pic na pay then-->
+          <!--!else condtion e je unknown actor er pic show korbe ....niche shob container er por oi condition ta deya-->
+
+          <div>{{ actorsss.character }}</div>
+          <div>({{ actorsss.name }})</div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </ng-container>
+</ng-container>
+<ng-container *ngIf="similarShows$ | async as similarshowdeo">
+  <app-banner title="Watch Similar" [shows]="similarshowdeo" />
+</ng-container>
+
+<ng-template #defaultActorPhoto>
+  <!--! eije ekhane thik same else condition tar name deya lagbe and image source te deya lagbe-->
+  <img src="/assets/images/actor.jpg" alt="No Picture" />
+</ng-template>
+

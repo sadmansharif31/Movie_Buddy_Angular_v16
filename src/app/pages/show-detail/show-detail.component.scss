@@ -1,0 +1,56 @@
+@import "../../../styles/colors";
+
+//? .p-tabview or .p-tabview-nav amr html component e nai. So egula ke alada vabe use korle kono change ashbe na
+//? UI te. Tai we use a property called ::ng-deep so that eta effective hoy and UI te change ta ashe.
+
+::ng-deep {
+  .p-tabview .p-tabview-nav {
+    //! eita website e inspect kore kore amake ber korte hobe. Then ekhane use korbo.
+    justify-content: center;
+  }
+
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    //! eita website e inspect kore kore amake ber korte hobe. Then ekhane use korbo.
+    color: $primary-color;
+  } //? heading gular color.
+
+  .p-tabview .p-tabview-nav .p-tabview-ink-bar {
+    //! eita website e inspect kore kore amake ber korte hobe. Then ekhane use korbo.
+    background-color: $primary-color;
+  } //? heading er niche je slider thake oitar color.
+}
+
+.poster {
+  max-width: 100%;
+}
+
+.overview {
+  line-height: 1.5;
+}
+
+.stat {
+  display: flex;
+  margin-bottom: 15px;
+  .label {
+    width: 150px;
+    font-weight: bold;
+  }
+
+  .value {
+    color: $primary-color;
+  }
+}
+
+.show-image {
+  width: 100%;
+}
+
+.actor {
+  padding: 10px;
+  img {
+    width: 100%;
+  }
+  div {
+    text-align: center;
+  }
+}
