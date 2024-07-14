@@ -11,7 +11,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./genres.component.scss'],
 })
 
-// *===================================== Routing Use Kore ========================================
+// ?===================================== Routing Use Kore ========================================
+
+
 export class GenresComponent implements OnInit {
   genres$: Observable<Genre[]> | null = null;
   shows$: Observable<MoviesDto> | null = null;
@@ -25,14 +27,12 @@ export class GenresComponent implements OnInit {
     this.route.params.subscribe((paramita) => {
       this.genreId = paramita['genreId'];
       this.loadShows();
-
-      //this.shows$=this.mservice.getMoviesByGenre(this.genreId)
-    });
+    }); //* Kono genre te click korle first page ta auto load hobe because ngOnInit er modhe this.loadshow() call kora hoyeche.
 
     // ! ekhane jokhon e onno route e click korbo tokhn e subsciption triggered hobe. That means, ok the params has been changed.
     // * So, get the shows again. This was not possible with snapshot.params. So, we used subscription here. Although, ngOnInit is
     // ? executed only one time but the subscription will be executed whenever there is a change in the params. Eta use na kore jodi
-    // ! genre te click kori taile always ekta genre er movie gulai show korbe. Click kore kore change korle oi ager genre er movie
+    // ! genre te click kori taile always ekta genre er movie gulai show korbe. Click kore jokhn genre change korbo tokhn ager genre er movie
     // * gulai show korbe. New genre er movie gula show korbe na. So better to use subscription instead of snapshot in this case.
   }
 
@@ -42,12 +42,12 @@ export class GenresComponent implements OnInit {
 
   pageBodlao(event: PaginatorState) {
     const pageNumber = event.page ? event.page + 1 : 1;
-    // Assuming you want to reload shows with the updated page number
+    //! Assuming you want to reload shows with the updated page number
     this.shows$ = this.mservice.getMoviesByGenre(this.genreId, pageNumber); //*pageBodlao e click korle new page number ta loadshows() te pass kora hobe
   }
 }
 
-// *===================================== Click Use Kore ========================================
+// ?===================================== Click Use Kore ========================================
 
 // export class GenresComponent implements OnInit {
 //   genres$: Observable<Genre[]> | null = null;
