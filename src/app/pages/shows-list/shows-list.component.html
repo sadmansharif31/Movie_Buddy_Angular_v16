@@ -9,7 +9,8 @@
           pInputText
           [(ngModel)]="searchValue"
           (change)="searchChanged()"
-        /> <!--! Je movie name ami type kore input dibo oita "searcValue" te store hobe-->
+        />
+        <!--! Je movie name ami type kore input dibo oita "searcValue" te store hobe-->
         <!--*searchValue change hole searchChanged() function e dhukbe-->
       </span>
     </div>
@@ -19,21 +20,21 @@
     <!--! showsList theke movie/show gula interative way te show-item component e pass hobe-->
     <div class="grid">
       <div class="col-2" *ngFor="let shows of listde.results">
-        <app-show-item [showItem]="shows" [showType]="showsType"/>
+        <app-show-item [showItem]="shows" [showType]="showsType" />
       </div>
     </div>
 
-  <div class="grid">
-    <div class="col-12">
-      <p-paginator
-        (onPageChange)="pageBodlao($event)"
-        [rows]="20"
-        [totalRecords]="listde.total_results"
-      /><!--! Total Records mane koto gula show/ movie fetch korbe-->
+    <div class="grid">
+      <div class="col-12">
+        <p-paginator
+          (onPageChange)="pageBodlao($event)"
+          [rows]="20"
+          [totalRecords]="listde.total_results"
+        /><!--! Total Records mane koto gula show/ movie fetch korbe-->
+      </div>
+      <!--* [row]= jei value dibo toto gula show/movie show korbe per page e-->
     </div>
-    <!--* [row]= jei value dibo toto gula show/movie show korbe per page e-->
-  </div>
-</ng-container>
+  </ng-container>
 </div>
 
 <!--? [(ngModel)]="value" is used to read the value from the input and use in code. Etai data binding-->
