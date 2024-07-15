@@ -14,4 +14,4 @@ export class ShowItemComponent {
   imageBaseUrl = imagesBaseUrl;
 }
 
-//* Matro Desktop e update korlam
+//* Laptop e clone korlam
